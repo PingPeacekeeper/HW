@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.exception.ResourceNotFoundException;
 import com.example.pojo.dto.TeacherResponseDTO;
 import com.example.pojo.entity.Teacher;
 import com.example.service.impl.TeacherServiceImpl;
@@ -52,5 +53,10 @@ public class TeacherController {
     public ResponseEntity<TeacherResponseDTO> updateStudent(@RequestBody Teacher teacher) {
         teacherService.update(teacher);
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleException() {
+        return new ResponseEntity<>("xxx not found", HttpStatus.NOT_FOUND);
     }
 }

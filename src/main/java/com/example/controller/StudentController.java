@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.exception.ResourceNotFoundException;
 import com.example.pojo.dto.StudentResponseDTO;
 import com.example.pojo.entity.Student;
 import com.example.service.StudentService;
@@ -60,5 +61,9 @@ public class StudentController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleException() {
+        return new ResponseEntity<>("xxx not found", HttpStatus.NOT_FOUND);
+    }
 
 }
